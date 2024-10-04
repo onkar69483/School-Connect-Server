@@ -85,3 +85,5 @@ app.put("/api/notice/:id", async (req, res) => {
 app.listen("8000", () => {
     console.log("Backend is ON!");
 });
+
+module.exports = app;
