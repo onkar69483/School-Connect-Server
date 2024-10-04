@@ -1,17 +1,6 @@
-import mongoose, { Document } from "mongoose";
+const mongoose = require("mongoose");
 
-interface IUser extends Document {
-    name: string;
-    age: number;
-    role: string;
-    batch?: string;
-    phone: string;
-    emergencyContact?: string;
-    address: string;
-    avatar: Buffer;
-}
-
-const userSchema = new mongoose.Schema<IUser>({
+const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, "Please enter your name"],
@@ -29,7 +18,7 @@ const userSchema = new mongoose.Schema<IUser>({
     batch: {
         type: String,
         enum: ["morning", "afternoon", "Both"],
-        required: function (this: IUser) {
+        required: function () {
             return this.role === "Student";
         },
     },
@@ -44,11 +33,11 @@ const userSchema = new mongoose.Schema<IUser>({
         type: String,
         required: [true, "Please enter your address"],
     },
-    avatar : {
-        type: 'Buffer',
+    avatar: {
+        type: Buffer,
         public_id: String,
-        url: String, 
-    }
+        url: String,
+    },
 });
 
-export default mongoose.model<IUser>("User", userSchema);
+module.exports = mongoose.model("User", userSchema);
