@@ -4,7 +4,7 @@ const cors = require("cors");
 
 require("dotenv").config();
 const app = express();
-const Notice = require("./models/notice.ts");
+const Notice = require("./models/notice.js");
 
 require("./config/db");
 
