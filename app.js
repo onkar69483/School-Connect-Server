@@ -1,20 +1,25 @@
 const express = require("express");
-
 const cors = require("cors");
-
 require("dotenv").config();
 const app = express();
 const Notice = require("./models/notice.js");
 
 require("./config/db");
-
 const mongoose = require("mongoose");
+
+// Import auth routes
+const authRoutes = require("./routes/authRoutes");
 
 // Allow all CORS origins
 app.use(cors({ origin: true }));
 
+// Middleware for parsing JSON
 app.use(express.json());
 
+// Use authentication routes
+app.use("/api/auth", authRoutes);
+
+// User routes (for testing or other features)
 app.get("/api/user/:id", (req, res) => {
     res.send("<h1>Backend connected with proxy</h1>");
 });
@@ -23,6 +28,7 @@ app.post("/api/user", (req, res) => {
     res.send("<h1>Backend connected with proxy</h1>");
 });
 
+// Notice routes
 app.get("/api/notice", async (req, res) => {
     try {
         const notices = await Notice.find();
@@ -82,6 +88,7 @@ app.put("/api/notice/:id", async (req, res) => {
     });
 });
 
+// Start server
 app.listen("8000", () => {
     console.log("Backend is ON!");
 });
