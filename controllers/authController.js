@@ -36,16 +36,16 @@ exports.login = async (req, res) => {
                 return res.status(200).json({
                     token,
                     user: {
-                        id: req.user._id,
-                        name: req.user.name,
-                        email: req.user.email,
-                        role: req.user.role,
-                        username: req.user.username,
-                        phone: req.user.phone,
-                        emergencyContact: req.user.emergencyContact,
-                        address: req.user.address,
-                        avatar: req.user.avatar,
-                        batch: req.user.batch,
+                        id: user._id,
+                        name: user.name,
+                        email: user.email,
+                        role: user.role,
+                        username: user.username,
+                        phone: user.phone,
+                        emergencyContact: user.emergencyContact,
+                        address: user.address,
+                        avatar: user.avatar,
+                        batch: user.batch,
                     },
                 });
             } else {
